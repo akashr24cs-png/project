@@ -93,4 +93,57 @@
 </footer>
 
 </body>
+<!-- Chatbot Button -->
+<div id="chatbot-icon" onclick="toggleChat()">💬</div>
+
+<!-- Chatbot Box -->
+<div id="chatbot-box">
+    <div id="chat-header">Chat with us 🤖</div>
+    
+    <div id="chat-body"></div>
+    
+    <input type="text" id="user-input" placeholder="Type your message..."
+        onkeypress="if(event.key==='Enter') sendMessage()">
+        <script>
+function toggleChat() {
+    let box = document.getElementById("chatbot-box");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
+function sendMessage() {
+    let input = document.getElementById("user-input");
+    let message = input.value;
+    let chatBody = document.getElementById("chat-body");
+
+    if (message.trim() === "") return;
+
+    chatBody.innerHTML += "<p><b>You:</b> " + message + "</p>";
+
+    let reply = getBotReply(message.toLowerCase());
+    chatBody.innerHTML += "<p><b>Bot:</b> " + reply + "</p>";
+
+    input.value = "";
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function getBotReply(msg) {
+    if (msg.includes("hi") || msg.includes("hello"))
+        return "Welcome to Jacob's Hotel 😊";
+
+    if (msg.includes("menu"))
+        return "We have Indian, Chinese & Drinks 🍽️";
+
+    if (msg.includes("biryani"))
+        return "Chicken Biryani costs ₹150";
+
+    if (msg.includes("noodles"))
+        return "Noodles available for ₹110";
+
+    if (msg.includes("time"))
+        return "We are open from 10 AM to 10 PM";
+
+    return "Sorry, I didn't understand. Try asking about menu or food!";
+}
+</script>
+</div>
 </html>
